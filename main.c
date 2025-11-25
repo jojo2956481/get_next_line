@@ -6,12 +6,12 @@
 /*   By: lebeyssa <lebeyssa@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:44:42 by lebeyssa          #+#    #+#             */
-/*   Updated: 2025/11/24 15:00:57 by lebeyssa         ###   ########lyon.fr   */
+/*   Updated: 2025/11/25 13:05:41 by lebeyssa         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
+/*
 int	main(void)
 {
 	int 	fd = open("file.txt", O_RDONLY);
@@ -22,6 +22,17 @@ int	main(void)
 		printf("%s\n",line);
 		free(line);
 	}
+	close (fd);
+	return (0);
+}
+*/
+
+
+int	main(void)
+{
+	int 	fd = open("file.txt", O_RDONLY);
+
+	printf("%s\n", get_next_line(fd));
 	close (fd);
 	return (0);
 }
