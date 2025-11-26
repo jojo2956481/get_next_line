@@ -27,7 +27,7 @@ typedef struct s_list
 #include <stdlib.h>
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 9
+# define BUFFER_SIZE 1024
 #endif
 
 char	*get_next_line(int fd);
@@ -38,6 +38,6 @@ void	ft_bzero(void *s, size_t n);
 char	*ft_strdup(const char *s);
 char	*ft_strchr(const char *s, int c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-
+int		ft_strlcat(char *dest, const char *src, size_t size);
 
 #endif

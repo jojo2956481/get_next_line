@@ -138,3 +138,27 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (substr);
 }
 
+int	ft_strlcat(char *dest, const char *src, size_t size)
+{
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	len_dest;
+	unsigned int	len_src;
+
+	j = 0;
+	len_dest = ft_strlen(dest);
+	len_src = ft_strlen(((char *)src));
+	i = len_dest;
+	if (size == 0 || len_dest >= size)
+		return (len_src + size);
+	else
+	{
+		while (j < (size - 1) - len_dest && j != len_src)
+		{
+			dest[i++] = src[j++];
+		}
+		dest[i] = '\0';
+		return (len_dest + len_src);
+	}
+}
+

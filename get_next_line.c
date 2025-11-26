@@ -12,57 +12,96 @@
 
 #include "get_next_line.h"
 
-int	ft_strlcpy(char *dest, const char *src, size_t size);
-
-char	check_endline(char *str)
+int check_endline(char *s)
 {
-	int	i;
+    int i = 0;
 
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\n')
-			return (i);
-		i++;
-	}
-	return (-1);
+    if (!s)
+        return -1;
+    while (s[i])
+    {
+        if (s[i] == '\n')
+            return i;
+        i++;
+    }
+    return -1;
 }
 
-char	*get_one_line(char *str, int fd)
+char *read_and_stash(int fd, char *stash)
 {
-	char		buffer[BUFFER_SIZE + 1];
-	char 		*dest;
-	int 		size;
-	int			n;
-	
-	while (1)
-	{
-		size = check_endline(str);
-		if (size != -1)
+    char buffer[BUFFER_SIZE + 1];
+    int n;
+	char *tmp;
+
+    while (check_endline(stash) == -1)
+    {
+        n = read(fd, buffer, BUFFER_SIZE);
+        if (n <= 0)
+            return stash;
+
+        buffer[n] = '\0';
+
+		if (!stash)
+            stash = ft_strdup(buffer);
+		else
 		{
-			dest = ft_substr(str, 0, size);
-			return (dest);
+        	tmp = ft_strjoin(stash, buffer);
+			free(stash);
+            stash = tmp;
 		}
-		n = read(fd, str, BUFFER_SIZE);
-		if (n <= 0)
-		{
-			if (str[0])
-				return (ft_strdup(str));
-			return(NULL);
-		}
-		buffer[n] = '\0';
-		str = ft_strjoin(str, buffer);
-	}
+    }
+    return stash;
 }
 
-
-char	*get_next_line(int fd)
+char *extract_line(char *stash)
 {
-	static char		str[BUFFER_SIZE + 1];
-	char 			*dest;
+    int i = check_endline(stash);
 
-	if (BUFFER_SIZE <= 0 || fd < 0)
-		return (0);
-	dest = get_one_line(str, fd);
-	return (dest);
+    if (i == -1)
+        return ft_strdup(stash);
+    return ft_substr(stash, 0, i + 1);
 }
+
+char *clean_stash(char *stash)
+{
+    int i = check_endline(stash);
+    char *new_stash;
+
+    if (i == -1)
+    {
+        free(stash);
+        return NULL;
+    }
+    new_stash = ft_strdup(stash + i + 1);
+    free(stash);
+	if (!new_stash[0])
+    {
+        free(new_stash);
+        return NULL;
+    }
+    return new_stash;
+}
+
+char *get_next_line(int fd)
+{
+    static char *stash = NULL;
+    char *line;
+
+    if (fd < 0 || BUFFER_SIZE <= 0)
+        return NULL;
+
+    stash = read_and_stash(fd, stash);
+	// printf("stash = [%s]\n", stash);
+    if (!stash || !stash[0])
+	{
+		free(stash);
+        stash = NULL;
+        return NULL;
+	}
+    line = extract_line(stash);
+    stash = clean_stash(stash);
+    return line;
+}
+
+
+
