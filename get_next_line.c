@@ -6,7 +6,7 @@
 /*   By: lebeyssa <lebeyssa@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:30:59 by lebeyssa          #+#    #+#             */
-/*   Updated: 2025/11/25 15:14:08 by lebeyssa         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 14:51:00 by lebeyssa         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,55 +14,55 @@
 
 int	ft_strlcpy(char *dest, const char *src, size_t size);
 
-char	check_endline(char *str, int size)
+char	check_endline(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (i != size)
+	while (str[i])
 	{
 		if (str[i] == '\n')
-			return (1);
+			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
+
+char	*get_one_line(char *str, int fd)
+{
+	char		buffer[BUFFER_SIZE + 1];
+	char 		*dest;
+	int 		size;
+	int			n;
+	
+	while (1)
+	{
+		size = check_endline(str);
+		if (size != -1)
+		{
+			dest = ft_substr(str, 0, size);
+			return (dest);
+		}
+		n = read(fd, str, BUFFER_SIZE);
+		if (n <= 0)
+		{
+			if (str[0])
+				return (ft_strdup(str));
+			return(NULL);
+		}
+		buffer[n] = '\0';
+		str = ft_strjoin(str, buffer);
+	}
+}
+
 
 char	*get_next_line(int fd)
 {
-	char		str[BUFFER_SIZE];
-	char		*dest;
-	int 		i;
-	int			n;
+	static char		str[BUFFER_SIZE + 1];
+	char 			*dest;
 
-	if (BUFFER_SIZE == 0)
+	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (0);
-	dest = malloc(sizeof(char) * 40);
-	if (dest == NULL)
-		return (0);
-	n = read(fd, &str, BUFFER_SIZE);
-	if (n < BUFFER_SIZE && check_endline(str, BUFFER_SIZE) == 0)
-	{
-		ft_strlcpy(dest, str, n + 1);
-		return (dest);
-	}
-	if (check_endline(str, BUFFER_SIZE) == 1)
-	{
-		i = 0;
-		while (str[i] != '\n')
-			i++;
-		ft_strlcpy(dest, str, i + 1);
-		return (dest);
-	}
-	while (check_endline(str, BUFFER_SIZE) != 1 && n == BUFFER_SIZE)
-	{
-		dest = ft_strjoin(dest, str);
-		n = read(fd, &str, BUFFER_SIZE);
-	}
-	i = 0;
-	while ((str[i] != '\n') && (i < n))
-		i++;
-	ft_strlcpy(str, str, i + 1);
-	dest = ft_strjoin(dest, str);
+	dest = get_one_line(str, fd);
 	return (dest);
 }
