@@ -6,7 +6,7 @@
 /*   By: lebeyssa <lebeyssa@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:44:49 by lebeyssa          #+#    #+#             */
-/*   Updated: 2025/11/26 14:31:44 by lebeyssa         ###   ########lyon.fr   */
+/*   Updated: 2025/11/27 09:38:44 by lebeyssa         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,20 +91,20 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup(char *s)
 {
 	int		i;
 	char	*dest;
 	int		size;
 
 	i = 0;
-	size = ft_strlen((char *)s);
+	size = ft_strlen(s);
 	dest = malloc(sizeof(char) * size + 1);
 	if (dest == NULL)
 		return (0);
-	while ((char)s[i] != '\0')
+	while (s[i] != '\0')
 	{
-		dest[i] = (char)s[i];
+		dest[i] = s[i];
 		i++;
 	}
 	dest[i] = '\0';
