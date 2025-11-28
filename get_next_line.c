@@ -6,31 +6,32 @@
 /*   By: lebeyssa <lebeyssa@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:30:59 by lebeyssa          #+#    #+#             */
-/*   Updated: 2025/11/28 11:41:35 by lebeyssa         ###   ########lyon.fr   */
+/*   Updated: 2025/11/28 11:55:01 by lebeyssa         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int check_endline(char *s)
+int	check_endline(char *s)
 {
-    int i = 0;
+	int	i;
 
-    if (!s)
-        return (-1);
-    while (s[i])
-    {
-        if (s[i] == '\n')
-            return (i);
-        i++;
-    }
-    return (-1);
+	i = 0;
+	if (!s)
+		return (-1);
+	while (s[i])
+	{
+		if (s[i] == '\n')
+			return (i);
+		i++;
+	}
+	return (-1);
 }
 
 char	*read_and_stock(int fd, char *static_buff)
 {
 	char	buffer[BUFFER_SIZE + 1];
-	int 	n;
+	int		n;
 	char	*tmp;
 
 	while (check_endline(static_buff) == -1)
@@ -43,9 +44,7 @@ char	*read_and_stock(int fd, char *static_buff)
 			return (NULL);
 		}
 		if (n == 0)
-		{
-			break;
-		}
+			break ;
 		buffer[n] = '\0';
 		if (!static_buff)
 			static_buff = ft_strdup(buffer);
@@ -66,7 +65,8 @@ char	*read_and_stock(int fd, char *static_buff)
 
 char	*get_one_line(char *static_buff)
 {
-	int i;
+	int	i;
+
 	if (!static_buff)
 		return (NULL);
 	i = check_endline(static_buff);
@@ -75,7 +75,7 @@ char	*get_one_line(char *static_buff)
 	return (ft_substr(static_buff, 0, i + 1));
 }
 
-char *clean_and_stock(char *static_buff)
+char	*clean_and_stock(char *static_buff)
 {
 	char	*new_buff;
 	int		i;
@@ -93,10 +93,9 @@ char *clean_and_stock(char *static_buff)
 		if ((!new_buff) || (new_buff[0] == '\0'))
 		{
 			free(new_buff);
-        	return (NULL);
+			return (NULL);
 		}
 	}
-	//free(static_buff);
 	return (new_buff);
 }
 
@@ -110,7 +109,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	static_buff = read_and_stock(fd, static_buff);
 	if (!static_buff)
-        return (NULL);
+		return (NULL);
 	line = get_one_line(static_buff);
 	static_buff = clean_and_stock(static_buff);
 	return (line);
