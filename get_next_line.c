@@ -6,7 +6,7 @@
 /*   By: lebeyssa <lebeyssa@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:30:59 by lebeyssa          #+#    #+#             */
-/*   Updated: 2025/11/27 15:40:01 by lebeyssa         ###   ########lyon.fr   */
+/*   Updated: 2025/11/28 10:47:59 by lebeyssa         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	*read_and_stock(int fd, char *static_buff)
 {
 	char	buffer[BUFFER_SIZE + 1];
 	int 	n;
+	char	*tmp;
 
 	while (check_endline(static_buff) == -1)
 	{
@@ -45,7 +46,16 @@ char	*read_and_stock(int fd, char *static_buff)
 		if (!static_buff)
 			static_buff = ft_strdup(buffer);
 		else
-			static_buff = ft_strjoin(static_buff, buffer);
+		{
+			tmp = ft_strjoin(static_buff, buffer);
+			if (!tmp)
+			{
+				free(static_buff);
+				return (NULL);
+			}
+			free(static_buff);
+			static_buff = tmp;
+		}
 	}
 	return (static_buff);
 }
@@ -53,7 +63,8 @@ char	*read_and_stock(int fd, char *static_buff)
 char	*get_one_line(char *static_buff)
 {
 	int i;
-	
+	if (!static_buff)
+		return (NULL);
 	i = check_endline(static_buff);
 	if (i == -1)
 		return (ft_strdup(static_buff));
@@ -67,10 +78,14 @@ char *clean_and_stock(char *static_buff)
 
 	i = check_endline(static_buff);
 	if (i == -1)
-		new_buff = NULL;
+	{
+		free(static_buff);
+		return (NULL);
+	}
 	else
 	{
 		new_buff = ft_strdup(&static_buff[i + 1]);
+		free(static_buff);
 		if ((!new_buff) || (new_buff[0] == '\0'))
 		{
 			free(new_buff);
@@ -89,18 +104,10 @@ char	*get_next_line(int fd)
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (check_endline(static_buff) == -1 && static_buff != NULL)
-	{
-		line = ft_strdup(static_buff);
-	}
-	else
-		static_buff = read_and_stock(fd, static_buff);
+	static_buff = read_and_stock(fd, static_buff);
 	if (!static_buff)
         return (NULL);
-	if (!line)
-		line = get_one_line(static_buff);
+	line = get_one_line(static_buff);
 	static_buff = clean_and_stock(static_buff);
 	return (line);
 }
-
-

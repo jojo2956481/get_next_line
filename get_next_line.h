@@ -6,7 +6,7 @@
 /*   By: lebeyssa <lebeyssa@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:31:31 by lebeyssa          #+#    #+#             */
-/*   Updated: 2025/11/27 15:36:34 by lebeyssa         ###   ########lyon.fr   */
+/*   Updated: 2025/11/28 10:47:11 by lebeyssa         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_list
 #include <stdlib.h>
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1
+# define BUFFER_SIZE 1000000
 #endif
 
 char	*get_next_line(int fd);

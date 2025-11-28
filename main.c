@@ -6,7 +6,7 @@
 /*   By: lebeyssa <lebeyssa@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:44:42 by lebeyssa          #+#    #+#             */
-/*   Updated: 2025/11/27 15:07:14 by lebeyssa         ###   ########lyon.fr   */
+/*   Updated: 2025/11/28 09:42:53 by lebeyssa         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	main(void)
 		n++;
 		free(line);
 	}
+	printf("%s%d%s%s\n", "line n", n, " ", line);
+	free(line);
 	close (fd);
 	return (0);
 }
