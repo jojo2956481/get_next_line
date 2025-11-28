@@ -6,7 +6,7 @@
 /*   By: lebeyssa <lebeyssa@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:30:59 by lebeyssa          #+#    #+#             */
-/*   Updated: 2025/11/28 11:55:01 by lebeyssa         ###   ########lyon.fr   */
+/*   Updated: 2025/11/28 14:17:46 by lebeyssa         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,27 @@ int	check_endline(char *s)
 
 char	*read_and_stock(int fd, char *static_buff)
 {
-	char	buffer[BUFFER_SIZE + 1];
+	char	*buffer;
 	int		n;
 	char	*tmp;
 
+	buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!buffer)
+		return (NULL);
 	while (check_endline(static_buff) == -1)
 	{
 		n = read(fd, buffer, BUFFER_SIZE);
 		if (n == -1)
 		{
 			free(static_buff);
+			free(buffer);
 			static_buff = NULL;
 			return (NULL);
 		}
 		if (n == 0)
+		{
 			break ;
+		}
 		buffer[n] = '\0';
 		if (!static_buff)
 			static_buff = ft_strdup(buffer);
@@ -54,12 +60,14 @@ char	*read_and_stock(int fd, char *static_buff)
 			if (!tmp)
 			{
 				free(static_buff);
+				free(buffer);
 				return (NULL);
 			}
 			free(static_buff);
 			static_buff = tmp;
 		}
 	}
+	free(buffer);
 	return (static_buff);
 }
 
