@@ -6,7 +6,7 @@
 /*   By: lebeyssa <lebeyssa@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:30:59 by lebeyssa          #+#    #+#             */
-/*   Updated: 2025/11/28 10:47:59 by lebeyssa         ###   ########lyon.fr   */
+/*   Updated: 2025/11/28 11:41:35 by lebeyssa         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ char	*read_and_stock(int fd, char *static_buff)
 	{
 		n = read(fd, buffer, BUFFER_SIZE);
 		if (n == -1)
+		{
+			free(static_buff);
+			static_buff = NULL;
 			return (NULL);
+		}
 		if (n == 0)
 		{
 			break;
@@ -92,7 +96,7 @@ char *clean_and_stock(char *static_buff)
         	return (NULL);
 		}
 	}
-	free(static_buff);
+	//free(static_buff);
 	return (new_buff);
 }
 
