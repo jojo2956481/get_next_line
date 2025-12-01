@@ -6,7 +6,7 @@
 /*   By: lebeyssa <lebeyssa@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:30:59 by lebeyssa          #+#    #+#             */
-/*   Updated: 2025/11/28 14:17:46 by lebeyssa         ###   ########lyon.fr   */
+/*   Updated: 2025/12/01 10:20:36 by lebeyssa         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,18 @@ int	check_endline(char *s)
 	return (-1);
 }
 
-char	*read_and_stock(int fd, char *static_buff)
+char	*read_and_stock(int fd, char *static_buff, char *buffer)
 {
-	char	*buffer;
 	int		n;
 	char	*tmp;
 
-	buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	if (!buffer)
-		return (NULL);
 	while (check_endline(static_buff) == -1)
 	{
 		n = read(fd, buffer, BUFFER_SIZE);
 		if (n == -1)
-		{
-			free(static_buff);
-			free(buffer);
-			static_buff = NULL;
-			return (NULL);
-		}
+			return (ft_secure_alloc(static_buff, buffer));
 		if (n == 0)
-		{
 			break ;
-		}
 		buffer[n] = '\0';
 		if (!static_buff)
 			static_buff = ft_strdup(buffer);
@@ -58,11 +47,7 @@ char	*read_and_stock(int fd, char *static_buff)
 		{
 			tmp = ft_strjoin(static_buff, buffer);
 			if (!tmp)
-			{
-				free(static_buff);
-				free(buffer);
-				return (NULL);
-			}
+				return (ft_secure_alloc(static_buff, buffer));
 			free(static_buff);
 			static_buff = tmp;
 		}
@@ -110,12 +95,16 @@ char	*clean_and_stock(char *static_buff)
 char	*get_next_line(int fd)
 {
 	static char	*static_buff;
+	char		*buffer;
 	char		*line;
 
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	static_buff = read_and_stock(fd, static_buff);
+	buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!buffer)
+		return (NULL);
+	static_buff = read_and_stock(fd, static_buff, buffer);
 	if (!static_buff)
 		return (NULL);
 	line = get_one_line(static_buff);

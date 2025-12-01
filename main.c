@@ -6,20 +6,21 @@
 /*   By: lebeyssa <lebeyssa@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:44:42 by lebeyssa          #+#    #+#             */
-/*   Updated: 2025/11/28 12:00:38 by lebeyssa         ###   ########lyon.fr   */
+/*   Updated: 2025/12/01 10:22:26 by lebeyssa         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 #include <fcntl.h>
-
+/*
 int	main(void)
 {
-	int 	fd = open("file.txt", O_RDONLY);
-	int 	n;
-	char	*line;
+	int			fd;
+	int			n;
+	char		*line;
 
+	fd = open("file.txt", O_RDONLY);
 	n = 1;
 	while ((line = get_next_line(fd)) != NULL)
 	{
@@ -31,8 +32,7 @@ int	main(void)
 	free(line);
 	close (fd);
 	return (0);
-}
-
+}*/
 
 /*
 int	main(void)

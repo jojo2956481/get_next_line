@@ -6,37 +6,41 @@
 /*   By: lebeyssa <lebeyssa@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:44:49 by lebeyssa          #+#    #+#             */
-/*   Updated: 2025/11/28 12:01:25 by lebeyssa         ###   ########lyon.fr   */
+/*   Updated: 2025/12/01 10:23:57 by lebeyssa         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(const char *str)
+char	*ft_secure_alloc(char *static_buff, char *buffer)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
+	free(static_buff);
+	free(buffer);
+	static_buff = NULL;
+	return (NULL);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	int		size;
 	int		len;
+	int		len1;
 	char	*str;
 
 	if (s1 == NULL || s2 == NULL)
 		return (0);
-	len = ft_strlen((char *)s1);
-	size = ft_strlen((char *)s1) + ft_strlen((char *)s2);
+	len = 0;
+	while (s1[len] != '\0')
+		len++;
+	len1 = 0;
+	while (s2[len1] != '\0')
+		len1++;
+	size = len + len1;
 	str = malloc(sizeof(char) * size + 1);
 	if (str == NULL)
 		return (0);
-	ft_strlcpy(str, (char *)s1, ft_strlen((char *)s1) + 1);
-	ft_strlcpy(&str[len], (char *)s2, ft_strlen((char *)s2) + 1);
+	ft_strlcpy(str, (char *)s1, len + 1);
+	ft_strlcpy(&str[len], (char *)s2, len1 + 1);
 	return (str);
 }
 
@@ -67,7 +71,9 @@ char	*ft_strdup(char *s)
 	int		size;
 
 	i = 0;
-	size = ft_strlen(s);
+	size = 0;
+	while (s[size] != '\0')
+		size++;
 	dest = malloc(sizeof(char) * size + 1);
 	if (dest == NULL)
 		return (0);
@@ -89,7 +95,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (s == NULL)
 		return (0);
 	i = 0;
-	size = ft_strlen((char *)s);
+	size = 0;
+	while (s[size] != '\0')
+		size++;
 	if ((size_t)start >= size)
 		return (malloc(sizeof(char) * 1));
 	if (len > (size - start))
