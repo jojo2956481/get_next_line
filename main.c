@@ -6,14 +6,14 @@
 /*   By: lebeyssa <lebeyssa@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:44:42 by lebeyssa          #+#    #+#             */
-/*   Updated: 2025/12/01 10:22:26 by lebeyssa         ###   ########lyon.fr   */
+/*   Updated: 2025/12/01 12:56:26 by lebeyssa         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 #include <fcntl.h>
-/*
+
 int	main(void)
 {
 	int			fd;
@@ -32,7 +32,7 @@ int	main(void)
 	free(line);
 	close (fd);
 	return (0);
-}*/
+}
 
 /*
 int	main(void)

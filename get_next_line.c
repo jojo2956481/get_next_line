@@ -6,7 +6,7 @@
 /*   By: lebeyssa <lebeyssa@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:30:59 by lebeyssa          #+#    #+#             */
-/*   Updated: 2025/12/01 10:20:36 by lebeyssa         ###   ########lyon.fr   */
+/*   Updated: 2025/12/01 12:57:53 by lebeyssa         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,12 @@ char	*get_next_line(int fd)
 	if (!static_buff)
 		return (NULL);
 	line = get_one_line(static_buff);
+	if (!line)
+	{
+		free(static_buff);
+		static_buff = NULL;
+		return (NULL);
+	}
 	static_buff = clean_and_stock(static_buff);
 	return (line);
 }
