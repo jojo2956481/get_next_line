@@ -2,10 +2,11 @@ This project has been created as part of the 42 curriculum by lebeyssa
 
 ## 📄 get_next_line
 
-get_next_line est un projet de l’école 42 
-dont l’objectif est d’implémenter une fonction capable de lire un fichier 
-ligne par ligne, sans en perdre le moindre caractère, 
-et en gérant efficacement un buffer de taille variabl.
+
+**get_next_line** is a project from 42 School  
+whose objective is to implement a function capable of reading a file  
+line by line, without losing any characters,  
+while efficiently managing a buffer of variable size
 
 
 ## Implémenter la fonction :
@@ -15,35 +16,38 @@ char *get_next_line(int fd);
 ```
 ## Cette fonction doit :
 
-retourner la prochaine ligne lue depuis le descripteur de fichier fd,
-fonctionner sur plusieurs appels successifs,
-gérer proprement le retour de fin de fichier (EOF),
-s’adapter à n’importe quelle valeur de BUFFER_SIZE.
+return the next line read from the file descriptor fd,
+
+work properly across multiple successive calls,
+
+correctly handle the end of file (EOF),
+
+adapt to any value of BUFFER_SIZE.
 
 ## 📁 Structure du projet
 
 ```
 .
 ├── get_next_line.h        # Prototypes + includes
-├── get_next_line_utils.c  # Fonctions utilitaires
-└── get_next_line.c        # focntion principale
+├── get_next_line_utils.c  # Utility functions
+└── get_next_line.c        # Main function
 ```
 ## 🔧 Compilation
 
-Pour compiler ton projet avec un buffer personnalisé :
+To compile your project with a custom buffer size:
 ```
 cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 \
     get_next_line.c get_next_line_utils.c main.c -o gnl
 
 ```
-Tu peux varier la taille du buffer :
+You can change the buffer size:
 
 ```
 -D BUFFER_SIZE=1
 -D BUFFER_SIZE=1000
 
 ```
-## 📝 Exemple d’utilisation
+## 📝 Example of use
 
 ```
 int     fd = open("test.txt", O_RDONLY);
@@ -57,20 +61,26 @@ while ((line = get_next_line(fd)) != NULL)
 close(fd);
 ```
 
-## 🧪 Tester le programme
+## 🧪 Testing the program
 
-Créer un fichier de test :
+Create a test file:
 ```
 echo -e "Hello\nWorld\n42!" > test.txt
 ```
-Compiler et lancer :
+Compile and run:
 ```
 ./gnl test.txt
 ```
-Tester avec Valgrind :
+Test with Valgrind:
 ```
 valgrind --leak-check=full ./gnl test.txt
 ```
+## 📜 Resources
+
+The project was based on the topic covered in the 42 curriculum. 
+For pedagogical purposes, 
+the use of AI was limited to creating this Readme.
+
 
 
 
