@@ -9,11 +9,11 @@ line by line, without losing any characters,
 while efficiently managing a buffer of variable size
 
 
-## Implémenter la fonction :
+## Implement the following function:
 ```
 char *get_next_line(int fd);
 ```
-## Cette fonction doit :
+## This function must:
 
 return the next line read from the file descriptor fd,
 
@@ -23,7 +23,7 @@ correctly handle the end of file (EOF),
 
 adapt to any value of BUFFER_SIZE.
 
-## 📁 Structure du projet
+## 📁 Project Structure
 
 ```
 .
