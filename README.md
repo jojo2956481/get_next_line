@@ -12,7 +12,6 @@ while efficiently managing a buffer of variable size
 ## Implémenter la fonction :
 ```
 char *get_next_line(int fd);
-
 ```
 ## Cette fonction doit :
 
@@ -38,14 +37,12 @@ To compile your project with a custom buffer size:
 ```
 cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 \
     get_next_line.c get_next_line_utils.c main.c -o gnl
-
 ```
 You can change the buffer size:
 
 ```
 -D BUFFER_SIZE=1
 -D BUFFER_SIZE=1000
-
 ```
 ## 📝 Example of use
 
