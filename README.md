@@ -1,6 +1,6 @@
 This project has been created as part of the 42 curriculum by lebeyssa
 
-## 📄 get_next_line
+# 📄 get_next_line
 
 
 **get_next_line** is a project from 42 School  
