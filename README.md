@@ -40,7 +40,7 @@ adapt to any value of BUFFER_SIZE.
 To compile your project with a custom buffer size:
 ```
 cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 \
-    get_next_line.c get_next_line_utils.c main.c -o gnl
+    get_next_line.c get_next_line_utils.c -o gnl
 ```
 You can change the buffer size:
 
@@ -51,15 +51,25 @@ You can change the buffer size:
 ## Example of use
 
 ```
-int     fd = open("test.txt", O_RDONLY);
-char    *line;
-
-while ((line = get_next_line(fd)) != NULL)
+int	main(void)
 {
-    printf("%s", line);
-    free(line);
+	int			fd;
+	int			n;
+	char		*line;
+
+	fd = open("file.txt", O_RDONLY);
+	n = 1;
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		printf("%s%d%s%s\n", "line n", n, " ", line);
+		n++;
+		free(line);
+	}
+	printf("%s%d%s%s\n", "line n", n, " ", line);
+	free(line);
+	close (fd);
+	return (0);
 }
-close(fd);
 ```
 
 ## Testing the program
@@ -70,11 +80,11 @@ echo -e "Hello\nWorld\n42!" > test.txt
 ```
 Compile and run:
 ```
-./gnl test.txt
+./gnl
 ```
 Test with Valgrind:
 ```
-valgrind --leak-check=full ./gnl test.txt
+valgrind --leak-check=full ./gnl
 ```
 # Resources
 
