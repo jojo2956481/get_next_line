@@ -1,6 +1,8 @@
-This project has been created as part of the 42 curriculum by lebeyssa
+_This project has been created as part of the 42 curriculum by lebeyssa._
 
-# 📄 get_next_line
+# Description
+
+## get_next_line
 
 
 **get_next_line** is a project from 42 School  
@@ -23,7 +25,7 @@ correctly handle the end of file (EOF),
 
 adapt to any value of BUFFER_SIZE.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 .
@@ -31,7 +33,9 @@ adapt to any value of BUFFER_SIZE.
 ├── get_next_line_utils.c  # Utility functions
 └── get_next_line.c        # Main function
 ```
-## 🔧 Compilation
+# Instructions
+
+## Compilation
 
 To compile your project with a custom buffer size:
 ```
@@ -44,7 +48,7 @@ You can change the buffer size:
 -D BUFFER_SIZE=1
 -D BUFFER_SIZE=1000
 ```
-## 📝 Example of use
+## Example of use
 
 ```
 int     fd = open("test.txt", O_RDONLY);
@@ -58,7 +62,7 @@ while ((line = get_next_line(fd)) != NULL)
 close(fd);
 ```
 
-## 🧪 Testing the program
+## Testing the program
 
 Create a test file:
 ```
@@ -72,7 +76,7 @@ Test with Valgrind:
 ```
 valgrind --leak-check=full ./gnl test.txt
 ```
-## 📜 Resources
+# Resources
 
 The project was based on the topic covered in the 42 curriculum. 
 For pedagogical purposes, 
