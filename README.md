@@ -76,11 +76,12 @@ int	main(void)
 
 Create a test file:
 ```
-echo -e "Hello\nWorld\n42!" > test.txt
+echo -e "Hello\nWorld\n42!" > file.txt
 ```
 Compile and run:
 ```
-./gnl
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 \
+    get_next_line.c get_next_line_utils.c -o gnl && ./gnl
 ```
 Test with Valgrind:
 ```
