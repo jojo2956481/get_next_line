@@ -6,7 +6,7 @@
 /*   By: lebeyssa <lebeyssa@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:31:31 by lebeyssa          #+#    #+#             */
-/*   Updated: 2025/12/01 12:56:13 by lebeyssa         ###   ########lyon.fr   */
+/*   Updated: 2026/01/05 11:02:40 by lebeyssa         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1
-#endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
 char	*get_next_line(int fd);
 char	*ft_strjoin(char const *s1, char const *s2);

@@ -6,13 +6,11 @@
 /*   By: lebeyssa <lebeyssa@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:30:59 by lebeyssa          #+#    #+#             */
-/*   Updated: 2026/01/05 10:33:06 by lebeyssa         ###   ########lyon.fr   */
+/*   Updated: 2026/01/05 10:55:17 by lebeyssa         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-#include <fcntl.h>
 
 int	check_endline(char *s)
 {
@@ -118,24 +116,4 @@ char	*get_next_line(int fd)
 	}
 	static_buff = clean_and_stock(static_buff);
 	return (line);
-}
-
-int	main(void)
-{
-	int			fd;
-	int			n;
-	char		*line;
-
-	fd = open("file.txt", O_RDONLY);
-	n = 1;
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		printf("%s%d%s%s\n", "line n", n, " ", line);
-		n++;
-		free(line);
-	}
-	printf("%s%d%s%s\n", "line n", n, " ", line);
-	free(line);
-	close (fd);
-	return (0);
 }
