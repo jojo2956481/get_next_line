@@ -6,7 +6,7 @@
 /*   By: lebeyssa <lebeyssa@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:44:49 by lebeyssa          #+#    #+#             */
-/*   Updated: 2025/12/01 10:23:57 by lebeyssa         ###   ########lyon.fr   */
+/*   Updated: 2026/01/06 09:29:04 by lebeyssa         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ char	*ft_secure_alloc(char *static_buff, char *buffer)
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		size;
-	int		len;
-	int		len1;
-	char	*str;
+	size_t		size;
+	size_t		len;
+	size_t		len1;
+	char		*str;
 
 	if (s1 == NULL || s2 == NULL)
 		return (0);
@@ -66,9 +66,9 @@ int	ft_strlcpy(char *dest, const char *src, size_t size)
 
 char	*ft_strdup(char *s)
 {
-	int		i;
-	char	*dest;
-	int		size;
+	size_t		i;
+	char		*dest;
+	size_t		size;
 
 	i = 0;
 	size = 0;

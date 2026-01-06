@@ -89,6 +89,8 @@ valgrind --leak-check=full ./gnl
 ```
 # Resources
 
+- https://www.codecademy.com/resources/docs/c/static-variables
+
 The project was based on the topic covered in the 42 curriculum. 
 For pedagogical purposes, 
 the use of AI was limited to creating this Readme.
