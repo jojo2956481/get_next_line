@@ -21,7 +21,7 @@ return the next line read from the file descriptor fd,
 
 work properly across multiple successive calls,
 
-correctly handle the end of file (EOF),
+correctly handle the end of file,
 
 adapt to any value of BUFFER_SIZE.
 
